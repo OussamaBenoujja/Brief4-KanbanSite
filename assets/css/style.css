@@ -103,6 +103,10 @@ body{
     height: 100vh;
     
 }
+#done{
+    width: 100%;
+    height: 100vh;
+}
 .list{
     cursor: grab;
 }
