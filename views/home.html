@@ -73,7 +73,7 @@
 
         <div class="table1">
             <span class="table-title">
-                <h1>To Do</h1><h1>|</h1><h1>3</h1>
+                <h1>To Do</h1><h1>|</h1><h1 id="numtodo">0</h1>
             </span>
             <hr>
             <div class="drop" id="todo">
@@ -84,7 +84,7 @@
 
         <div class="table2">
             <span class="table-title">
-                <h1>In progress</h1><h1>|</h1><h1>1</h1>
+                <h1>In progress</h1><h1>|</h1><h1 id="numprogress">0</h1>
             </span>
             <hr>
             <div  class="drop" id="doing">
@@ -94,7 +94,7 @@
         
         <div class="table3">
             <span class="table-title">
-                <h1>Done</h1><h1>|</h1><h1>2</h1>
+                <h1>Done</h1><h1>|</h1><h1 id="numpdone">0</h1>
             </span>
             <hr>
             <div class="drop" id="done">
@@ -139,20 +139,20 @@
                         <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Color</label>
                         <select id="task-color" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <option selected="">Select Color</option>
-                            <option value="0">red</option>
-                            <option value="1">blue</option>
-                            <option value="2">green</option>
-                            <option value="3">yellow</option>
+                            <option value="red">red</option>
+                            <option value="blue">blue</option>
+                            <option value="green">green</option>
+                            <option value="yellow">yellow</option>
                         </select>
                      </div>
                       <div class="col-span-2 sm:col-span-1">
                           <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label>
                           <select id="task-pr" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                               <option selected="">Select Priority</option>
-                              <option value="0">P0</option>
-                              <option value="1">P1</option>
-                              <option value="2">P2</option>
-                              <option value="3">P3</option>
+                              <option value="P0">P0</option>
+                              <option value="P1">P1</option>
+                              <option value="P2">P2</option>
+                              <option value="P3">P3</option>
                           </select>
                       </div>
                       <div class="col-span-2">

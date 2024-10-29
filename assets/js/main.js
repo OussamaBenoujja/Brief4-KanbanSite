@@ -35,6 +35,19 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       zone.classList.remove('drop-zone-active');
+
+
+      const taskList = document.getElementById('todo');
+      const task1 = document.getElementById("doing");
+      const task2 = document.getElementById("done");
+      const todoCounter = document.getElementById("numtodo");
+      const doingCounter = document.getElementById("numprogress");
+      const doneCounter = document.getElementById("numpdone");
+    
+      todoCounter.innerHTML = taskList.childElementCount;
+      doingCounter.innerHTML = task1.childElementCount;
+      doneCounter.innerHTML = task2.childElementCount;
+
     });
 
     zone.addEventListener('dragleave', () => {
@@ -64,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
     modal.classList.remove('flex');
   });
 });
-
 
 
 document.getElementById('modal-form').addEventListener('submit', function(event) {
@@ -102,6 +114,7 @@ document.getElementById('modal-form').addEventListener('submit', function(event)
 
 
   this.reset();
+  location.reload();
 });
 
 
@@ -112,31 +125,42 @@ function displayTasks() {
   
   const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
+  const task1 = document.getElementById("doing");
+  const task2 = document.getElementById("done");
+  const todoCounter = document.getElementById("numtodo");
+  const doingCounter = document.getElementById("numprogress");
+  const doneCounter = document.getElementById("numpdone");
+
+  todoCounter.innerHTML = taskList.childElementCount;
+  doingCounter.innerHTML = task1.childElementCount;
+  doneCounter.innerHTML = task2.childElementCount;
+
+
+
   
   if (tasks.length === 0) {
       taskList.innerHTML = '<p>No tasks available.</p>';
       return; 
   }
 
+  
   tasks.forEach((task, index) => {
-    
+
       const taskDiv = document.createElement('div');
       taskDiv.className = 'list'; 
       taskDiv.setAttribute('draggable', 'true'); 
       taskDiv.id = `card${index + 1}`; 
-
-      
       taskDiv.innerHTML = `
-          <div class="cardTask">
+          <div class="cardTask" style="border-color: ${task.color}">
               <h1>${task.title}</h1>
               <p>${task.description}</p>
+              <p>${task.priority}</p>
               <div>
                   <button type="button" class="delete-btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" id="del">Delete</button>
                   <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
               </div>
           </div>
       `;
-
       taskList.appendChild(taskDiv);
       const deleteBtn = taskDiv.querySelector('.delete-btn');
       deleteBtn.addEventListener('click', () => {
@@ -187,6 +211,9 @@ function displayTasks() {
         
         cards.forEach(initializeCard);
         dropZones.forEach(initializeDropZone);
+
+
+
   });
 }
 
