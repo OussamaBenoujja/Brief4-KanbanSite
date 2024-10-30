@@ -1,5 +1,26 @@
 
 
+/*
+const filterprior = document.getElementById('priorityFilter');
+filterprior.addEventListener("change",function(){
+})*/
+
+const filterbtn = document.getElementById('filterbtn');
+
+filterbtn.addEventListener("click", function () {
+
+    const datestart = document.getElementById('datepicker-range-start').value;
+    const dateend = document.getElementById('datepicker-range-end').value;
+    const priorF = document
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    
+    tasks.forEach((task, index) => {
+        let tcard = `card${index + 1}`;
+        let cardElement = document.getElementById(tcard);
+        cardElement.style.display =  (task.date >= datestart && task.date <= dateend)  ? "block" : "none"; 
+    });
+
+});
 
 document.addEventListener('DOMContentLoaded', function() {
   const cards = document.querySelectorAll('.list');
@@ -29,13 +50,19 @@ document.addEventListener('DOMContentLoaded', function() {
       const card = document.getElementById(cardId);
 
       if (card) {
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        let indx = cardId.split("card");
+        let indx1 = indx.toString();
+        let indx2 = parseInt(indx1);
+        tasks[indx2].cont = zone.id; 
+        console.log(tasks);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
         zone.appendChild(card);
         initializeCard(card);
-        console.log(`Dropped card ${cardId} in zone: ${zone.id}`); // Debugging
+        console.log(`Dropped card ${cardId} in zone: ${zone.id}`); 
       }
 
       zone.classList.remove('drop-zone-active');
-
 
       const taskList = document.getElementById('todo');
       const task1 = document.getElementById("doing");
@@ -88,21 +115,23 @@ document.getElementById('modal-form').addEventListener('submit', function(event)
     const title = document.getElementById('title').value;
     const dsrp = document.getElementById('dsrp').value;
     const color = document.getElementById('task-color').value; 
-    const priority = document.getElementById('task-pr').value; 
+    const priority = document.getElementById('task-pr').value;
+    const date = document.getElementById('date').value; 
+    const taskel = document.getElementById('todo').id;
 
     console.log('Title:', title);
     console.log('Description:', dsrp);
     console.log('Color:', color); 
     console.log('Priority:', priority); 
-
-
-      
+    console.log('Priority:', date); 
+    console.log('father Container:', taskel);
       const task = {
           title: title,
           description: dsrp,
           color: color,
           priority: priority,
-          
+          date: date,
+          cont: taskel,
       };
 
       
@@ -110,7 +139,6 @@ document.getElementById('modal-form').addEventListener('submit', function(event)
       tasks.push(task);
       localStorage.setItem('tasks', JSON.stringify(tasks));
       console.log('Task added:', task);
-
 
 
   this.reset();
@@ -134,16 +162,12 @@ function displayTasks() {
   todoCounter.innerHTML = taskList.childElementCount;
   doingCounter.innerHTML = task1.childElementCount;
   doneCounter.innerHTML = task2.childElementCount;
-
-
-
   
   if (tasks.length === 0) {
       taskList.innerHTML = '<p>No tasks available.</p>';
       return; 
   }
 
-  
   tasks.forEach((task, index) => {
 
       const taskDiv = document.createElement('div');
@@ -155,13 +179,14 @@ function displayTasks() {
               <h1>${task.title}</h1>
               <p>${task.description}</p>
               <p>${task.priority}</p>
+              <p>Date:${task.date}</p>
               <div>
                   <button type="button" class="delete-btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" id="del">Delete</button>
                   <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
               </div>
           </div>
       `;
-      taskList.appendChild(taskDiv);
+      document.getElementById(task.cont).appendChild(taskDiv);
       const deleteBtn = taskDiv.querySelector('.delete-btn');
       deleteBtn.addEventListener('click', () => {
         taskDiv.remove(); 
@@ -195,9 +220,16 @@ function displayTasks() {
             const card = document.getElementById(cardId);
 
             if (card) {
+              let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+              let indx = cardId.split("card");
+              let indx1 = indx.toString();
+              let indx2 = parseInt(indx1);
+              tasks[indx2].cont = zone.id; 
+              console.log(tasks);
+              localStorage.setItem('tasks', JSON.stringify(tasks));
               zone.appendChild(card);
               initializeCard(card);
-              console.log(`Dropped card ${cardId} in zone: ${zone.id}`); // Debugging
+              console.log(`Dropped card ${cardId} in zone: ${zone.id}`); 
             }
 
             zone.classList.remove('drop-zone-active');
@@ -205,18 +237,15 @@ function displayTasks() {
 
           zone.addEventListener('dragleave', () => {
             zone.classList.remove('drop-zone-active');
-            console.log(`Drag left zone: ${zone.id}`); // Debugging
+            console.log(`Drag left zone: ${zone.id}`); 
           });
         }
         
         cards.forEach(initializeCard);
         dropZones.forEach(initializeDropZone);
 
-
-
   });
 }
-
 
 function removeTaskFromStorage(index) {
   let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
