@@ -50,13 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const card = document.getElementById(cardId);
 
       if (card) {
-        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        let indx = cardId.split("card");
-        let indx1 = indx.toString();
-        let indx2 = parseInt(indx1);
-        tasks[indx2].cont = zone.id; 
-        console.log(tasks);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
         zone.appendChild(card);
         initializeCard(card);
         console.log(`Dropped card ${cardId} in zone: ${zone.id}`); 
@@ -105,13 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-
 document.getElementById('modal-form').addEventListener('submit', function(event) {
   
   event.preventDefault();
-
   
-    
     const title = document.getElementById('title').value;
     const dsrp = document.getElementById('dsrp').value;
     const color = document.getElementById('task-color').value; 
@@ -140,9 +130,9 @@ document.getElementById('modal-form').addEventListener('submit', function(event)
       localStorage.setItem('tasks', JSON.stringify(tasks));
       console.log('Task added:', task);
 
-
   this.reset();
   location.reload();
+
 });
 
 
@@ -182,7 +172,7 @@ function displayTasks() {
               <p>Date:${task.date}</p>
               <div>
                   <button type="button" class="delete-btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" id="del">Delete</button>
-                  <button type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
+                  <button type="button" class="edit-btn focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
               </div>
           </div>
       `;
@@ -192,7 +182,30 @@ function displayTasks() {
         taskDiv.remove(); 
         removeTaskFromStorage(index); 
       });
+      const editBtn = taskDiv.querySelector('.edit-btn');
+      const modal = document.getElementById('crud-modal33');
+      const closeModalBtn = modal.querySelector('[data-modal-toggle]');
+        editBtn.addEventListener('click', () => {
+          modal.classList.toggle('hidden');  
+          modal.classList.toggle('flex'); 
+          modal .getElementById('title').value = `task.title`;
+          modal .getElementById('dsrp').value = `task.description`;
+          modal .getElementById('task-color').value = `task.color`; 
+          modal .getElementById('task-pr').value = `task.priority`;
+          modal .getElementById('date').value = `task.date`;    
+        });
+        closeModalBtn.addEventListener('click', () => {
+          modal.classList.add('hidden');     
+          modal.classList.remove('flex');
+        });
+
+
+      //modal.addEventListener("submit", function(){
         
+      //})
+
+
+        //this part is relate to drop and drag functions :: goint to make it it's own function later
         const cards = document.querySelectorAll('.list');
         const dropZones = document.querySelectorAll('.drop');
 
@@ -243,7 +256,6 @@ function displayTasks() {
         
         cards.forEach(initializeCard);
         dropZones.forEach(initializeDropZone);
-
   });
 }
 
