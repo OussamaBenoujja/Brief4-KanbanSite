@@ -5,6 +5,25 @@ const filterprior = document.getElementById('priorityFilter');
 filterprior.addEventListener("change",function(){
 })*/
 
+
+
+
+const filterSearch = document.querySelector('.searchbtn');
+const srch_ = document.getElementById('default-search');
+
+srch_.addEventListener("input", function (e) {
+    e.preventDefault();
+    const srch = document.getElementById('default-search').value.toLowerCase(); 
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.forEach((task, index) => {
+        let tcard = `card${index + 1}`;
+        let cardElement = document.getElementById(tcard);
+        const matchesSearch = !srch || task.title.toLowerCase().includes(srch);
+        cardElement.style.display = matchesSearch ? "block" : "none";
+    });
+});
+
+
 const filterbtn = document.getElementById('filterbtn');
 
 filterbtn.addEventListener("click", function () {
@@ -157,7 +176,7 @@ function displayTasks() {
       taskList.innerHTML = '<p>No tasks available.</p>';
       return; 
   }
-
+  let ctk;
   tasks.forEach((task, index) => {
 
       const taskDiv = document.createElement('div');
@@ -186,13 +205,14 @@ function displayTasks() {
       const modal = document.getElementById('crud-modal33');
       const closeModalBtn = modal.querySelector('[data-modal-toggle]');
         editBtn.addEventListener('click', () => {
+          ctk = index;
           modal.classList.toggle('hidden');  
           modal.classList.toggle('flex'); 
-          modal .getElementById('title').value = `task.title`;
-          modal .getElementById('dsrp').value = `task.description`;
-          modal .getElementById('task-color').value = `task.color`; 
-          modal .getElementById('task-pr').value = `task.priority`;
-          modal .getElementById('date').value = `task.date`;    
+          modal.querySelector('#title').value = task.title;
+          modal.querySelector('#dsrp').value = task.description;
+          modal.querySelector('#task-color').value = task.color; 
+          modal.querySelector('#task-pr').value = task.priority;
+          modal.querySelector('#date').value = task.date;    
         });
         closeModalBtn.addEventListener('click', () => {
           modal.classList.add('hidden');     
@@ -200,9 +220,24 @@ function displayTasks() {
         });
 
 
-      //modal.addEventListener("submit", function(){
-        
-      //})
+      modal.addEventListener("submit", function(){
+              const task_new = {
+                title: modal.querySelector('#title').value,
+                description: modal.querySelector('#dsrp').value,
+                color: modal.querySelector('#task-color').value,
+                priority: modal.querySelector('#task-pr').value,
+                date: modal.querySelector('#date').value,
+                cont: task.cont,
+            };
+
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks[ctk] = task_new;
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        console.log('Task added:', task_new);
+
+        this.reset();
+        location.reload();
+      })
 
 
         //this part is relate to drop and drag functions :: goint to make it it's own function later
