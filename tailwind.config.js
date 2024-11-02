@@ -5,6 +5,7 @@ module.exports = {
     "./assets/js/*.{html,js}",
     "./src/*.{html,js}",
     "./views/*.{html,js}",
+    "./testEnv/*.{html,js}",
   
   ],
   theme: {

@@ -6,6 +6,15 @@ filterprior.addEventListener("change",function(){
 })*/
 
 
+function sortTasksByPriority(tasks__, ad = true) {
+  return tasks__.sort((a, b) => {
+      if (ad) {
+          return a.priority.localeCompare(b.priority);
+      } else {
+          return b.priority.localeCompare(a.priority);
+      }
+  });
+}
 
 
 const filterSearch = document.querySelector('.searchbtn');
@@ -38,7 +47,6 @@ filterbtn.addEventListener("click", function () {
         let cardElement = document.getElementById(tcard);
         cardElement.style.display =  (task.date >= datestart && task.date <= dateend)  ? "block" : "none"; 
     });
-
 });
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -178,22 +186,62 @@ function displayTasks() {
   }
   let ctk;
   tasks.forEach((task, index) => {
-
+      let sp = "white";
+      switch(task.priority){
+        case "P0":
+            sp = "red";
+            break;
+        case "P1":
+            sp = "blue";
+            break;
+        case "P2":
+            sp = "green";
+            break;
+        case "P3":
+            sp = "yellow";
+            break;
+      }
       const taskDiv = document.createElement('div');
       taskDiv.className = 'list'; 
       taskDiv.setAttribute('draggable', 'true'); 
       taskDiv.id = `card${index + 1}`; 
       taskDiv.innerHTML = `
-          <div class="cardTask" style="border-color: ${task.color}">
-              <h1>${task.title}</h1>
-              <p>${task.description}</p>
-              <p>${task.priority}</p>
-              <p>Date:${task.date}</p>
               <div>
-                  <button type="button" class="delete-btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" id="del">Delete</button>
-                  <button type="button" class="edit-btn focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">Edit</button>
-              </div>
-          </div>
+                
+                    <div style="border-color: ${task.color};" class="cardthis relative flex flex-col min-w-0 break-words bg-gray-200 border-0 shadow-soft-xl rounded-2xl bg-clip-border">
+                      <div class="flex-auto px-1 pt-6">
+                        <p class="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-slate-800 text-sm bg-clip-text">Project #2</p>
+                        <a href="javascript:;">
+                          <h5>${task.title}</h5>
+                        </a>
+                        <p class="mb-6 leading-normal text-sm">${task.description}</p>
+                        <div class="flex items-center justify-between">
+                            <div class="tofix101">
+                                <button type="button" class="delete-btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm   dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" id="del">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" class="size-6">
+                                        <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
+                                      </svg>
+                                      </button>
+                                <button type="button" class="edit-btn focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm dark:focus:ring-yellow-900">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" class="size-6">
+                                        <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
+                                        <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
+                                      </svg>                              
+                                </button>
+                            </div>
+                          <div class="prepIcon">
+                            <div id="box" style="background-color: ${sp};"><p>${task.priority}</p></div>
+                            <div id="box1" style="border-top: 15px solid ${sp};"></div>
+                          </div>
+                          <div class="mt-2">
+                            <a href="javascript:;" class="relative z-20 inline-flex items-center justify-center w-10 h-10 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid ease-soft-in-out text-xs rounded-circle hover:z-30">
+                              <img class="w-full rounded-circle" alt="Image placeholder" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-dashboard/assets/img/team-4.jpg" />
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+        </div>
       `;
       document.getElementById(task.cont).appendChild(taskDiv);
       const deleteBtn = taskDiv.querySelector('.delete-btn');
