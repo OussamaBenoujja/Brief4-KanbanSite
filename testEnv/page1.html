@@ -1,48 +1,234 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../src/output.css" rel="stylesheet">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Oussama Benoujja">
+  <meta name="keywords" content="kanban board, online kanban, kanban project management">
+  <meta http-equiv="Content-Language" content="en">
+  <meta name="description" content="Kanban site to control team tasks and personal advancement">
+
+  <link href="../src/output.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
 </head>
-<body>
+<body class="bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-200">
 
 
-    <div class="w-full max-w-full mb-6 md:w-6/12 md:flex-none xl:mb-0 xl:w-3/12">
-        <div class="relative flex flex-col min-w-0 break-words bg-gray-200 border-0 shadow-soft-xl rounded-2xl bg-clip-border">
-          <div class="flex-auto px-1 pt-6">
-            <p class="relative z-10 mb-2 leading-normal text-transparent bg-gradient-to-tl from-gray-900 to-slate-800 text-sm bg-clip-text">Project #2</p>
-            <a href="javascript:;">
-              <h5>Modern</h5>
-            </a>
-            <p class="mb-6 leading-normal text-sm">As Uber works through a huge amount of internal management turmoil.</p>
-            <div class="flex items-center justify-between">
-                <div>
-                    <button type="button" class="delete-btn focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" id="del">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                            <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
-                          </svg>
-                          </button>
-                    <button type="button" class="edit-btn focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
-                            <path d="M21.731 2.269a2.625 2.625 0 0 0-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 0 0 0-3.712ZM19.513 8.199l-3.712-3.712-8.4 8.4a5.25 5.25 0 0 0-1.32 2.214l-.8 2.685a.75.75 0 0 0 .933.933l2.685-.8a5.25 5.25 0 0 0 2.214-1.32l8.4-8.4Z" />
-                            <path d="M5.25 5.25a3 3 0 0 0-3 3v10.5a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3V13.5a.75.75 0 0 0-1.5 0v5.25a1.5 1.5 0 0 1-1.5 1.5H5.25a1.5 1.5 0 0 1-1.5-1.5V8.25a1.5 1.5 0 0 1 1.5-1.5h5.25a.75.75 0 0 0 0-1.5H5.25Z" />
-                          </svg>                              
-                    </button>
-                  
-                </div>
-              <div class="mt-2">
-                <a href="javascript:;" class="relative z-20 inline-flex items-center justify-center w-10 h-10 -ml-4 text-white transition-all duration-200 border-2 border-white border-solid ease-soft-in-out text-xs rounded-circle hover:z-30">
-                  <img class="w-full rounded-circle" alt="Image placeholder" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-dashboard/assets/img/team-4.jpg" />
-                </a>
-              </div>
+    <button id="settingsBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12a7.5 7.5 0 0 0 15 0m-15 0a7.5 7.5 0 1 1 15 0m-15 0H3m16.5 0H21m-1.5 0H12m-8.457 3.077 1.41-.513m14.095-5.13 1.41-.513M5.106 17.785l1.15-.964m11.49-9.642 1.149-.964M7.501 19.795l.75-1.3m7.5-12.99.75-1.3m-6.063 16.658.26-1.477m2.605-14.772.26-1.477m0 17.726-.26-1.477M10.698 4.614l-.26-1.477M16.5 19.794l-.75-1.299M7.5 4.205 12 12m6.894 5.785-1.149-.964M6.256 7.178l-1.15-.964m15.352 8.864-1.41-.513M4.954 9.435l-1.41-.514M12.002 12l-3.75 6.495" />
+        </svg>
+    </button>
+
+    <!-- Button to trigger file upload -->
+    <div class="innerSettings">
+    <button id="bg-upload-btn">Set Background Image</button>
+    <input type="file" id="bg-upload" accept="image/*">
+    <label for="opacity-slider">Opacity:</label>
+    <input type="range" id="opacity-slider" min="0" max="100" value="100">
+    </div>
+    <!-- Top bar with buttons and search bar -->
+    <div class="top-bar flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-700 shadow-md">
+
+      <img class="logo" src="../assets/img/logo.png" alt="logo Image on top bar">
+        <form class="flex items-center max-w-md w-full">
+            <div class="relative w-full">
+                <input type="search" id="default-search" class="block w-full p-4 pl-10 text-sm rounded-lg bg-gray-200 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500" placeholder="Search for a specific Task" required />
+                <button type="submit" class="absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 text-white rounded-lg text-sm px-4 py-2 focus:ring-4 focus:ring-blue-300">Search</button>
             </div>
-          </div>
-        </div>
-      </div>
+        </form>
 
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" id="addtaskbtn">
+          Add Task +
+      </button>
+    </div>
+
+    <!-- Filter options -->
+    <div class="filter-bar flex justify-center mt-6 space-x-4">
+        <select id="priorityFilter" class="p-2 rounded-lg bg-gray-200 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500">
+            <option selected>Filter by Priority</option>
+            <option value="1">Priority Up</option>
+            <option value="2">Priority Down</option>
+        </select>
+        
+        <div class="flex items-center">
+            <input id="datepicker-range-start" type="date" class="p-2 rounded-lg bg-gray-200 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500" />
+            <span class="mx-2">to</span>
+            <input id="datepicker-range-end" type="date" class="p-2 rounded-lg bg-gray-200 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500" />
+        </div>
+
+        <button id="filterbtn" class="flex items-center p-2 bg-gray-100 rounded-lg hover:bg-gray-200 dark:bg-gray-700 dark:hover:bg-gray-600">
+            <svg class="w-5 h-5 mr-2 text-gray-800 dark:text-white" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M1 5h1.424a3.228 3.228 0 0 0 6.152 0H19a1 1 0 1 0 0-2H8.576a3.228 3.228 0 0 0-6.152 0H1a1 1 0 1 0 0 2Zm18 4h-1.424a3.228 3.228 0 0 0-6.152 0H1a1 1 0 1 0 0 2h10.424a3.228 3.228 0 0 0 6.152 0H19a1 1 0 0 0 0-2Zm0 6H8.576a3.228 3.228 0 0 0-6.152 0H1a1 1 0 0 0 0 2h1.424a3.228 3.228 0 0 0 6.152 0H19a1 1 0 0 0 0-2Z"/>
+            </svg>
+            Filter
+        </button>
+    </div>
+
+    <!-- Task tables -->
+    <div class="todobox grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 px-4">
+        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex justify-between items-center mb-2">
+                <h1 class="text-xl font-semibold">To Do</h1>
+                <span id="numtodo" class="text-blue-500 font-bold">0</span>
+            </div>
+            <hr class="mb-2">
+            <div id="todo" class="drop space-y-2">
+               
+            </div>
+        </div>
+
+        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex justify-between items-center mb-2">
+                <h1 class="text-xl font-semibold">In Progress</h1>
+                <span id="numprogress" class="text-blue-500 font-bold">0</span>
+            </div>
+            <hr class="mb-2">
+            <div id="doing" class="drop space-y-2">
+               
+            </div>
+        </div>
+
+        <div class="p-4 bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="flex justify-between items-center mb-2">
+                <h1 class="text-xl font-semibold">Done</h1>
+                <span id="numpdone" class="text-blue-500 font-bold">0</span>
+            </div>
+            <hr class="mb-2">
+            <div id="done" class="drop space-y-2">
+               
+            </div>
+        </div>
+    </div>
+
+  <!-- Main modal -->
+  <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Create New Task
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <form class="p-4 md:p-5" id="modal-form">
+                <div class="modalExtra grid gap-4 mb-4 grid-cols-2">
+                    <div class="col-span-2">
+                        <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                        <input type="text" maxlength="20" name="name" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                    </div>
+                    <div class="col-span-2">
+                          <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                          <input type="date" name="date" id="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required="">
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                      <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Color</label>
+                      <select id="task-color" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                          <option selected="" value="">Select Color</option>
+                          <option value="red">red</option>
+                          <option value="blue">blue</option>
+                          <option value="green">green</option>
+                          <option value="yellow">yellow</option>
+                      </select>
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label>
+                        <select id="task-pr" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                            <option selected="" value="">Select Priority</option>
+                            <option value="P0">P0</option>
+                            <option value="P1">P1</option>
+                            <option value="P2">P2</option>
+                            <option value="P3">P3</option>
+                        </select>
+                    </div>
+                    <div class="col-span-2">
+                        <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task Description</label>
+                        <textarea id="dsrp" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write Task description here"></textarea>                    
+                    </div>
+                </div>
+                <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                    Add new Task
+                </button>
+                <button type="button" class="text-white inline-flex items-center bg-blue-900 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" id="addmultiple">
+                  <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+              </button>
+            </form>
+        </div>
+    </div>
+</div> 
+
+
+ <!-- Main modal -->
+ <div id="crud-modal33" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div class="relative p-4 w-full max-w-md max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+          <!-- Modal header -->
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                  Create New Task
+              </h3>
+              <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-toggle="crud-modal33">
+                  <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                  </svg>
+                  <span class="sr-only">Close modal</span>
+              </button>
+          </div>
+          <!-- Modal body -->
+          <form class="p-4 md:p-5" id="modal-form">
+              <div class="grid gap-4 mb-4 grid-cols-2">
+                  <div class="col-span-2">
+                      <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Title</label>
+                      <input type="text" maxlength="20" name="name" id="title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Type product name" required="">
+                  </div>
+                  <div class="col-span-2">
+                        <label for="date" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                        <input type="date" name="date" id="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                </div>
+                    <div class="col-span-2 sm:col-span-1">
+                    <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Color</label>
+                    <select id="task-color" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                        <option selected="" value="">Select Color</option>
+                        <option value="red">red</option>
+                        <option value="blue">blue</option>
+                        <option value="green">green</option>
+                        <option value="yellow">yellow</option>
+                    </select>
+                 </div>
+                  <div class="col-span-2 sm:col-span-1">
+                      <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Priority</label>
+                      <select id="task-pr" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" required>
+                          <option selected="" value="">Select Priority</option>
+                          <option value="P0">P0</option>
+                          <option value="P1">P1</option>
+                          <option value="P2">P2</option>
+                          <option value="P3">P3</option>
+                      </select>
+                  </div>
+                  <div class="col-span-2">
+                      <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task Description</label>
+                      <textarea id="dsrp" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write Task description here"></textarea>                    
+                  </div>
+              </div>
+              <button type="submit" class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                  <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
+                  Update Task
+              </button>
+          </form>
+      </div>
+  </div>
+</div> 
 
 </body>
+<script src="../assets/js/main.js"></script>
 </html>
-
