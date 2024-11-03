@@ -163,7 +163,23 @@ body{
     #bg-upload {
     display: none;
     }
-    
+
 .innerSettings{
     display: none;
+}
+
+
+@media (max-width: 770px){
+    .top-bar{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    .filter-bar{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+    }
 }
